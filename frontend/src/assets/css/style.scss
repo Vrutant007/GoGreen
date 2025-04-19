@@ -1,0 +1,243 @@
+//Global Colors
+$primary-color : rgb(8, 226, 8);
+$secondary-color : rgb(217, 217, 2);
+$text-color : #000;
+$light-background : #9e9b9b;
+$text-white : #FFFF;
+$dark-background : #222725;
+$tertiary-color:#2F4858;
+$primary-font: "DM Sans", sans-serif;
+
+/**** Google Font **********/
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&display=swap');
+
+header{
+    .container{
+        span{
+            color: $primary-color;
+        }
+    }
+}
+footer{
+    background-color: $tertiary-color;
+    h2{
+        font-size: 1.5em;
+    }
+    ul{
+        li{
+            margin-bottom: 10px;
+            a{
+                font-size: 1.2em;
+                color: $text-white;
+            }
+        }
+    }
+}
+body{
+    font-family: $primary-font;
+    font-size: 1em;
+    color: $text-color;
+    font-weight: 500;
+}
+
+h1{
+    font-size: 2.5em;
+}
+
+h2{
+    font-size: 2em;
+}
+
+h3{
+    font-size: 1.3em;
+}
+
+h4{
+    font-size: 1em;
+}
+
+a{
+    text-decoration: none;
+    color: $text-color;
+    &::hover{
+        color: $primary-color;
+    }
+}
+
+.primary-text{
+    color: $primary-color ;
+}
+
+.secondary-text{
+    color: $secondary-color ;
+}
+
+
+ul{
+    padding-left: 0;
+    li{
+        list-style: none;
+    }
+}
+
+.container{
+    max-width: 1440px;
+}
+
+.btn{
+    
+    &.btn-primary{
+        background-color: $primary-color;
+        border-color: $primary-color;
+        padding: 7px 25px;
+        &:hover{
+            background-color: $text-color;
+            border-color: $text-color;
+            color: $text-white;
+        }
+    }
+
+    &.btn-secondary{
+        background-color: $text-color;
+        border-color: $text-color;
+        color: $text-white;
+        padding: 7px 25px;
+        &:hover{
+            background-color: $primary-color;
+            border-color: $primary-color;
+            color: $text-white;
+        }
+    }
+}
+.section-1{
+    .hero{
+        background: url('../Products/GoGreen.jpg');//linear-gradient(to right, rgba(0,0,0,0.8),rgba(0,0,0,0)),url('../Products/GoGreen.jpg');
+        min-height: 550px;
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+        //width: 100%;
+    }
+}
+.section-2{
+    .product{
+        .card-img{
+            overflow: hidden;
+            border-radius: 10px;
+            img{
+                border-radius: 10px;
+                transition: all 0.3s ease-out;
+            }
+        }
+        &:hover{
+            img{
+                scale: 1.2;
+            }
+        }
+        .card-body{
+            padding: 0;
+            a{
+                font-size: 1.2em;
+            }
+            .price{
+                font-size: 1.2em;
+                font: solid;
+                span{
+                    color: rgba($text-color, 0.5);
+                }
+            }
+        }
+    }
+}
+
+.container-shop{
+    .product{
+        .card-img{
+            overflow: hidden;
+            border-radius: 10px;
+            img{
+                border-radius: 10px;
+                transition: all 0.3s ease-out;
+            }
+        }
+        &:hover{
+            img{
+                scale: 1.2;
+            }
+        }
+        .card-body{
+            padding: 0;
+            a{
+                font-size: 1.2em;
+                &:hover{
+                    color: $primary-color;
+                }
+            }
+            .price{
+                font-size: 1.2em;
+                font: solid;
+                span{
+                    color: rgba($text-color, 0.5);
+                }
+            }
+        }
+    }
+}
+
+.product-detail{
+    .mySwiper{
+        .swiper-slide{
+            height: auto !important;
+        }
+    }
+    .price{
+        font-size: 1.2em;
+        font: solid;
+        span{
+            color: rgba($text-color, 0.5);
+        }
+    }
+}
+.nav-tabs{
+    .nav-link{
+        color: $text-color;
+    }
+}
+
+.login{
+    width: 455px;
+}
+
+.sidebar{
+    ul{
+        li{
+            border-bottom: 1px solid rgba(6,17,35,0.2);
+            margin-bottom: 2px;
+            a{
+                display: block;
+                padding: 10px;
+                color: $text-color;
+                &:hover{
+                    color: $primary-color;
+                }
+            }
+        }
+    }
+}
+
+.cartBucket{
+    position: relative;
+    div{
+        position: absolute;
+        background-color: #F97316;
+        color: #FFF;
+        display: inline-block;
+        width: 20px;
+        height: 20px;
+        border-radius: 10px;
+        top: -5px;
+        right: -13px;
+        font-size: 12px;
+        text-align: center;
+    }
+}
