@@ -74,6 +74,24 @@ const Show = () => {
         XLSX.writeFile(workbook, filename);
     }
 
+    // Add these with useState
+    const [currentPage, setCurrentPage] = useState(1);
+    const ordersPerPage = 7; // adjust as needed
+
+    // Calculate paginated data
+    const indexOfLastOrder = currentPage * ordersPerPage;
+    const indexOfFirstOrder = indexOfLastOrder - ordersPerPage;
+    const currentOrders = product.slice(indexOfFirstOrder, indexOfLastOrder);
+
+    // Handle page change
+    const paginate = (pageNumber) => setCurrentPage(pageNumber);
+
+    // Page numbers
+    const pageNumbers = [];
+    for (let i = 1; i <= Math.ceil(product.length / ordersPerPage); i++) {
+        pageNumbers.push(i);
+    }
+
     useEffect(() => {
         fetchProducts(); 
     })
@@ -115,7 +133,7 @@ const Show = () => {
                                 </thead>
                                 <tbody>
                                     {
-                                        product.map(product =>{
+                                        currentOrders.map(product =>{
                                             return(
                                                 <tr>
                                                     <td>{product.id}</td>
@@ -153,6 +171,23 @@ const Show = () => {
                                 </tbody>
                             </table>
                         }
+                        <nav className="mt-3">
+                            <ul className="pagination justify-content-end">
+                                <li className={`page-item ${currentPage === 1 ? 'disabled' : ''}`}>
+                                <button className="page-link" onClick={() => paginate(currentPage - 1)}>Previous</button>
+                                </li>
+                                {pageNumbers.map(number => (
+                                <li key={number} className={`page-item ${currentPage === number ? 'active' : ''}`}>
+                                    <button onClick={() => paginate(number)} className="page-link">
+                                    {number}
+                                    </button>
+                                </li>
+                                ))}
+                                <li className={`page-item ${currentPage === pageNumbers.length ? 'disabled' : ''}`}>
+                                <button className="page-link" onClick={() => paginate(currentPage + 1)}>Next</button>
+                                </li>
+                            </ul>
+                        </nav>
                     </div>
                     </div>
                 </div>

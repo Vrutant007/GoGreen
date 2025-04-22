@@ -52,9 +52,27 @@ const Show = () => {
         
     }
 
+    // Add these with useState
+    const [currentPage, setCurrentPage] = useState(1);
+    const ordersPerPage = 7; // adjust as needed
+
+    // Calculate paginated data
+    const indexOfLastOrder = currentPage * ordersPerPage;
+    const indexOfFirstOrder = indexOfLastOrder - ordersPerPage;
+    const currentOrders = brand.slice(indexOfFirstOrder, indexOfLastOrder);
+
+    // Handle page change
+    const paginate = (pageNumber) => setCurrentPage(pageNumber);
+
+    // Page numbers
+    const pageNumbers = [];
+    for (let i = 1; i <= Math.ceil(brand.length / ordersPerPage); i++) {
+        pageNumbers.push(i);
+    }
+
     useEffect(() => {
         fetchBrands(); 
-    })
+    },[])
   return (
     <>
         <Header/>
@@ -69,7 +87,7 @@ const Show = () => {
                     <SideBar/>
                 </div>
                 {/*MainBar */}
-                    <div className='col-md-9'>
+                    <div className='col-md-9 pb-5'>
                         <div className='card shadow'>
                         <div className="card-body p-4">
                             <table className='table table-hover'>
@@ -86,7 +104,7 @@ const Show = () => {
                                         brand.length == 0 && <Nostate/> 
                                     }
                                     {
-                                        brand &&  brand.map(brand => {
+                                        currentOrders &&  currentOrders.map(brand => {
                                             return(
                                                 <tr>
                                                     <td>{brand.id}</td>
@@ -114,6 +132,23 @@ const Show = () => {
                                     
                                 </tbody>
                             </table>
+                            <nav className="mt-3">
+                                <ul className="pagination justify-content-end">
+                                    <li className={`page-item ${currentPage === 1 ? 'disabled' : ''}`}>
+                                    <button className="page-link" onClick={() => paginate(currentPage - 1)}>Previous</button>
+                                    </li>
+                                    {pageNumbers.map(number => (
+                                    <li key={number} className={`page-item ${currentPage === number ? 'active' : ''}`}>
+                                        <button onClick={() => paginate(number)} className="page-link">
+                                        {number}
+                                        </button>
+                                    </li>
+                                    ))}
+                                    <li className={`page-item ${currentPage === pageNumbers.length ? 'disabled' : ''}`}>
+                                    <button className="page-link" onClick={() => paginate(currentPage + 1)}>Next</button>
+                                    </li>
+                                </ul>
+                            </nav>
                         </div>
                     </div>
                 </div>

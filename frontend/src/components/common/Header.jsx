@@ -50,7 +50,7 @@ const Header = () => {
                             navbarScroll>
                             <Nav.Link href="/">Home</Nav.Link>
                             {/* <Nav.Link href="#action2">Brands</Nav.Link> */}
-                            <Nav.Link href="/shop">Hot Drops</Nav.Link>
+                            <Nav.Link href="/shop">All Drops</Nav.Link>
                             <NavDropdown title="Categoies" id="basic-nav-dropdown">
                                 {
                                     categories && categories.map(category => {
