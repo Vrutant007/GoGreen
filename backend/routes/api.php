@@ -8,6 +8,7 @@ use App\Http\Controllers\admin\ProductController;
 use App\Http\Controllers\admin\TempImageController;
 use App\Http\Controllers\admin\UserController;
 use App\Http\Controllers\front\AccountController;
+use App\Http\Controllers\front\ChangePasswordController;
 use App\Http\Controllers\front\CouponController;
 use App\Http\Controllers\front\OrderController;
 use App\Http\Controllers\front\ProductController as FrontProductController;
@@ -32,6 +33,7 @@ Route::put('update-coupon-code/{id}', [CouponController::class,'updateCode']);
 Route::delete('delete-coupon-code/{id}', [CouponController::class,'deleteCouponCode']);
 // routes/api.php
 Route::post('/create-payment-intent', [StripeController::class, 'createPayment']);
+Route::post('/change-password/{id}',[ChangePasswordController::class,'changePassword']);
 
 
 
