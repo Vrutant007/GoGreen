@@ -8,6 +8,7 @@ import { useForm } from 'react-hook-form';
 import { apiUrl, usertoken } from './common/http';
 import { toast } from 'react-toastify';
 import { CardElement, useStripe, useElements } from '@stripe/react-stripe-js';
+import UserAddresses from './common/UserAddresses';
 
 
 
@@ -179,7 +180,7 @@ const Checkout = () => {
                         
                         <div className='col-md-7'>
                             <h3 className='border-bottom pb-3'><strong>Billing Details</strong></h3>
-                            <div className='row pt-3'>
+                            {/* <div className='row pt-3'>
                                 <div className='col-md-6'>
                                     <div className='mb-3'>
                                         <input
@@ -273,7 +274,8 @@ const Checkout = () => {
                                         {errors.mobile && <p className='invalid-feedback'>{errors.mobile?.message}</p>}
                                     </div>
                                 </div>
-                            </div>
+                            </div> */}
+                            <UserAddresses/>
                         </div>
                         <div className='col-md-5'>
                             <h3 className='border-bottom pb-3'><strong>Items</strong></h3>

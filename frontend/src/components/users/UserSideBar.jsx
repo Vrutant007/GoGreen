@@ -12,6 +12,7 @@ const UserSideBar = () => {
             <ul>
                 <li><Link to='/account/dash'>My Account</Link></li>
                 <li><a href='/account/orders'>Orders</a></li>
+                <li><a href="/account/address-list">My Address</a></li>
                 <li><a href='/account/change-password'>Change Password</a></li>
                 <li><a href='#' onClick={logout}>Logout</a></li>
             </ul>

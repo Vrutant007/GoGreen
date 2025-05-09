@@ -13,6 +13,7 @@ use App\Http\Controllers\front\CouponController;
 use App\Http\Controllers\front\OrderController;
 use App\Http\Controllers\front\ProductController as FrontProductController;
 use App\Http\Controllers\front\StripeController;
+use App\Http\Controllers\front\UserAddressController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -44,6 +45,11 @@ Route::group(['middleware' => ['auth:sanctum','checkUserRole']],function(){
     Route::get('latest', [UserController::class,'getLastOrderDetails']);
     Route::get('get-orders', [UserController::class,'getOrders']);
     Route::get('get-order-details/{id}', [AccountController::class,'getOrderDetails']);
+    Route::post('save-address',[UserAddressController::class,'store']);
+    Route::get('get-user-address/{id}',[UserAddressController::class,'show']);
+    Route::get('get-address',[UserAddressController::class,'index']);
+    Route::put('update-address/{id}',[UserAddressController::class,'update']);
+    Route::delete('delete-address/{id}',[UserAddressController::class,'destroy']);
 
 });
 
