@@ -32,6 +32,8 @@ import CreateCoupon from './components/admin/CouponCode/CreateCoupon'
 import EditCoupon from './components/admin/CouponCode/EditCoupon'
 import { Elements } from '@stripe/react-stripe-js';
 import { loadStripe } from '@stripe/stripe-js';
+import ChangePassword from './components/admin/ChangePassword'
+import UserChangePassword from './components/users/UserChangePassword'
 
 
 
@@ -71,6 +73,14 @@ function App() {
             <UserRequireAuth>
               <Confirmation/>
             </UserRequireAuth>}/> 
+
+            <Route path='/account/change-password' element={
+            <UserRequireAuth>
+              <UserChangePassword />
+            </UserRequireAuth>
+          }/>
+
+          {/*Admin Routes */}
 
           <Route path='/admin/login' element={<Login/>}/> 
           <Route path='/admin/dash' element={
@@ -152,7 +162,12 @@ function App() {
             <AdminRequireAuth>
               <EditCoupon/>
             </AdminRequireAuth>
-          }/> 
+          }/>
+          <Route path='/admin/change-password' element={
+            <AdminRequireAuth>
+              <ChangePassword/>
+            </AdminRequireAuth>
+          }/>
         </Routes>      
       </BrowserRouter>   
       <ToastContainer />  

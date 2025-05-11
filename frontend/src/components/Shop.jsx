@@ -18,8 +18,8 @@ const Shop = () => {
     const brand = searchParams.get('brand');
     return brand ? brand.split(',') : [];
   })
- 
 
+  const search = new URLSearchParams(location.search).get('search') || '';
 
   const fetchCategories = () => {
     fetch(`${apiUrl}/get-categories`,{
@@ -60,41 +60,41 @@ const Shop = () => {
   }
 
   const fetchProducts = () => {
-    //console.log(catChecked)
-    let search = [];
-    let params = '';
-    
-    if (catChecked.length > 0){
-      search.push(['category', catChecked])
+    const queryParams = [];
+  
+    if (catChecked.length > 0) {
+      queryParams.push(['category', catChecked.join(',')]);
     }
-
-    if (brandChecked.length > 0){
-      search.push(['brand', brandChecked])
+  
+    if (brandChecked.length > 0) {
+      queryParams.push(['brand', brandChecked.join(',')]);
     }
-
-    if(search.length > 0){
-      params = new URLSearchParams(search);
-      setSearchParams(params)
-    }else{
-      setSearchParams([])
+  
+    const searchQuery = new URLSearchParams(location.search).get('search');
+    if (searchQuery) {
+      queryParams.push(['search', searchQuery]);
     }
-    fetch(`${apiUrl}/get-products?${params}`,{
+  
+    const params = new URLSearchParams(queryParams).toString();
+    setSearchParams(params); // updates URL
+  
+    fetch(`${apiUrl}/get-products?${params}`, {
       method: 'GET',
       headers: {
         'Content-type': 'application/json',
         'Accept': 'application/json'
-        }
-    })
-    .then(res => res.json())
-    .then(result => {
-      if(result.status == 200){
-        //console.log(result);
-        SetProducts(result.data)
-      }else{
-        console.log('Something went wrong');
       }
     })
-  }
+      .then(res => res.json())
+      .then(result => {
+        if (result.status === 200) {
+          SetProducts(result.data);
+        } else {
+          console.error('Something went wrong');
+        }
+      });
+  };
+  
 
   const handleCategories = (e) => {
     const {checked, value} = e.target;
@@ -118,9 +118,13 @@ const Shop = () => {
     fetchCategories();
     fetchBrands();
     fetchProducts();
-  },[catChecked,brandChecked])
+  },[catChecked,brandChecked,location.search])
   return (
     <>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+    />
     <Header/>
       <div className='container-shop'>
         {/*BreadCrums */}
@@ -172,32 +176,38 @@ const Shop = () => {
         {/*MainBar */}
         <div className='col-md-9'>
           <div className='row pb-5'>
-            {
-              products && products.map(product => {
-                return(
-                <div className='col-md-4 col-6'>
+            {products && products.length > 0 ? (
+              products.map(product => (
+                <div className='col-md-4 col-6' key={product.id}>
                   <div className='product card border-0'>
                     <div className='card-img'>
                       <Link to={`/product/${product.id}`}>
-                        <img src={product.image_url} alt="" className='w-100'/>
+                        <img src={product.image_url} alt="" className='w-100' />
                       </Link>
                     </div>
                     <div className='card-body'>
                       <Link to={`/product/${product.id}`}>{product.title}</Link>
                       <div className='price py-2'>
-                          &#8377;{product.price} &nbsp;&nbsp;
-                          {
-                            product.compare_price && <span className='text-decoration-line-through'>&#8377;{product.compare_price}</span>
-                          }
-                          <br />per {product.weight}
-                      </div> 
+                        &#8377;{product.price} &nbsp;&nbsp;
+                        {product.compare_price && (
+                          <span className='text-decoration-line-through'>
+                            &#8377;{product.compare_price}
+                          </span>
+                        )}
+                        <br />per {product.weight}
+                      </div>
                     </div>
                   </div>
                 </div>
-              )
-              })
-            }
-              
+              ))
+            ) : (
+              <div className='col-12 text-center py-5'>
+                <h4>
+                  <i className="fas fa-search-minus me-2" style={{ color: '#888' }}></i>
+                  No products found.
+                </h4>
+              </div>
+            )}
           </div>
         </div>
       </div>

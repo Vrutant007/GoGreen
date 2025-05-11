@@ -8,6 +8,7 @@ use App\Http\Controllers\admin\ProductController;
 use App\Http\Controllers\admin\TempImageController;
 use App\Http\Controllers\admin\UserController;
 use App\Http\Controllers\front\AccountController;
+use App\Http\Controllers\front\ChangePasswordController;
 use App\Http\Controllers\front\CouponController;
 use App\Http\Controllers\front\OrderController;
 use App\Http\Controllers\front\ProductController as FrontProductController;
@@ -21,6 +22,7 @@ Route::get('get-featured-products', [FrontProductController::class,'FeaturedProd
 Route::get('get-categories', [FrontProductController::class,'getCatergories']);
 Route::get('get-brands', [FrontProductController::class,'getBrands']);
 Route::get('get-products', [FrontProductController::class,'getProducts']);
+Route::get('get-products', [FrontProductController::class,'filteredProducts']);
 Route::get('get-product/{id}', [FrontProductController::class,'productPage']);
 Route::post('register', [AccountController::class,'register']);
 Route::post('login', [AccountController::class,'authenticate']);
@@ -32,6 +34,7 @@ Route::put('update-coupon-code/{id}', [CouponController::class,'updateCode']);
 Route::delete('delete-coupon-code/{id}', [CouponController::class,'deleteCouponCode']);
 // routes/api.php
 Route::post('/create-payment-intent', [StripeController::class, 'createPayment']);
+Route::post('/change-password/{id}',[ChangePasswordController::class,'changePassword']);
 
 
 
