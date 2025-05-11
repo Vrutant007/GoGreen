@@ -18,6 +18,7 @@ const Checkout = () => {
     const [paymentMethod, setpaymentMethod] = useState('cod');
     const {cartData, Delivery, grandTotal, subTotal, applyCoupon, removeCoupon, coupon, discount} = useContext(CartContext);
     const [couponCode, setCouponCode] = useState('');
+    const [selectedAddressId, setSelectedAddressId] = useState(null);
     const [formData, setFormData] = useState({
         name: '',
         email: '',
@@ -63,7 +64,8 @@ const Checkout = () => {
             cart: cartData,
             coupon_code: coupon?.code || '',
             payment_method: paymentMethod,
-            card_last_four: formData.card_last_four || null
+            card_last_four: formData.card_last_four || null,
+            address_id: selectedAddressId
         }
         fetch(`${apiUrl}/save-order`,{
             method: 'POST',
@@ -275,7 +277,7 @@ const Checkout = () => {
                                     </div>
                                 </div>
                             </div> */}
-                            <UserAddresses/>
+                            <UserAddresses onSelect={(id) => setSelectedAddressId(id)}/>
                         </div>
                         <div className='col-md-5'>
                             <h3 className='border-bottom pb-3'><strong>Items</strong></h3>
