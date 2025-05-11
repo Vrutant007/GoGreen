@@ -50,6 +50,7 @@ Route::group(['middleware' => ['auth:sanctum','checkUserRole']],function(){
     Route::get('get-address',[UserAddressController::class,'index']);
     Route::put('update-address/{id}',[UserAddressController::class,'update']);
     Route::delete('delete-address/{id}',[UserAddressController::class,'destroy']);
+    Route::get('get-single-address/{id}',[UserAddressController::class,'getSingleAddress']);
 
 });
 

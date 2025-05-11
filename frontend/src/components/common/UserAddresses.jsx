@@ -37,7 +37,7 @@ const UserAddresses = ({onSelect}) => {
         {address.length === 0 ? (
             <div className="d-flex justify-content-between align-items-center mb-3">
                 <p>No Addresses found.</p>
-                <Link to="/account/address/add" className="btn btn-success">+ Add Address</Link>
+                <Link to="/account/add-address" className="btn btn-success">+ Add Address</Link>
             </div>
         ) : (
             <div className="address-list">
@@ -49,7 +49,7 @@ const UserAddresses = ({onSelect}) => {
                 >
                     <div className="d-flex justify-content-between align-items-center">
                         <h5 className="mb-2">{addr.label}</h5>
-                        <Link to={`/account/address/edit/${addr.id}`} className="text-primary">✏️ Edit</Link>
+                        <Link to={`/account/edit-address/${addr.id}`} className="text-primary">✏️ Edit</Link>
                     </div>
                     <p>{addr.name}, {addr.email}</p>
                     <p>{addr.mobile}</p>

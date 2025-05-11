@@ -36,6 +36,8 @@ import ChangePassword from './components/admin/ChangePassword'
 import UserChangePassword from './components/users/UserChangePassword'
 import UserAddresses from './components/common/UserAddresses'
 import UserListAddress from './components/users/UserListAddress'
+import UserCreateAddress from './components/users/UserCreateAddress'
+import UserEditAddress from './components/users/UserEditAddress'
 
 
 
@@ -89,6 +91,16 @@ function App() {
             <Route path='/account/address-list' element={
             <UserRequireAuth>
               <UserListAddress/>
+            </UserRequireAuth>}/>
+
+            <Route path='/account/add-address' element={
+            <UserRequireAuth>
+              <UserCreateAddress/>
+            </UserRequireAuth>}/>
+
+            <Route path='/account/edit-address/:id' element={
+            <UserRequireAuth>
+              <UserEditAddress/>
             </UserRequireAuth>}/>
 
 

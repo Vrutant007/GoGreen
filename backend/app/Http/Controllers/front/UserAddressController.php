@@ -20,7 +20,7 @@ class UserAddressController extends Controller
             'label' => 'required|string',
             'name' => 'required|string',
             'email' => 'required|email',
-            'mobile' => 'required',
+            'mobile' => 'required|digits:10|numeric',
             'address' => 'required|string',
             'city' => 'required|string',
             'state' => 'required|string',
@@ -133,6 +133,22 @@ class UserAddressController extends Controller
             'status' => 200,
             'message' => 'Address Deleted Successfully',
             'data' => []
+        ],200);
+    }
+
+    public function getSingleAddress ($id) {
+        $addresses = Addresses::find($id);
+
+        if ($addresses == null) {
+            return response()->json([
+                'status' => 404,
+                'message' => 'Address not Found'
+            ],404);
+        }
+
+        return response()->json([
+            'status' => 200,
+            'data' => $addresses
         ],200);
     }
 }
