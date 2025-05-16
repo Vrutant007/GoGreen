@@ -53,7 +53,7 @@ const UserAddresses = ({onSelect}) => {
                     </div>
                     <p>{addr.name}, {addr.email}</p>
                     <p>{addr.mobile}</p>
-                    <p>{addr.address}, {addr.city}, {addr.state} - {addr.zip_code}</p>
+                    <p>{addr.address},{addr.area} {addr.city}, {addr.state} - {addr.zip_code}</p>
                 </div>
             ))}
             </div>
