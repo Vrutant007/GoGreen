@@ -74,6 +74,7 @@ const UserListAddress = () => {
                                         <th>Label</th>
                                         <th>Name</th>
                                         <th>Address</th>
+                                        <th>Area</th>
                                         <th>City</th>
                                         <th>State</th>
                                         <th>Zip Code</th>
@@ -94,6 +95,7 @@ const UserListAddress = () => {
                                                 <td>{address.label}</td>
                                                 <td>{address.name}</td>
                                                 <td>{address.address}</td>
+                                                <td>{address.area}</td>
                                                 <td>{address.city}</td>
                                                 <td>{address.state}</td>
                                                 <td>{address.zip_code}</td>

@@ -113,6 +113,17 @@ const UserCreateAddress = () => {
                     {errors.address && <p className='invalid-feedback'>{errors.address?.message}</p>}
                 </div>
                 <div className='mb-3'>
+                    <label htmlFor="" className='form-label'>Area</label>
+                    <input
+                    {
+                        ...register("area", {
+                            required: "The Area is required",
+                        })
+                    }
+                    type="text" className={`form-control ${errors.area && 'is-invalid'}`} placeholder='Area'/>
+                    {errors.area && <p className='invalid-feedback'>{errors.area?.message}</p>}
+                </div>
+                <div className='mb-3'>
                     <label htmlFor="" className='form-label'>City</label>
                     <input
                     {
