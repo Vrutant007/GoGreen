@@ -12,29 +12,31 @@ use Illuminate\Support\Facades\DB;
 class UserController extends Controller
 {
     public function index(){
-
-        $user = DB::table('users')
-        ->join('orders', 'users.id', '=', 'orders.user_id')
-        ->select(
-            'users.id as user_id',
-            'users.name as user_name',
-            'users.email',
-            'orders.mobile',
-            'orders.address',
-            'orders.city',
-            'orders.state',
-            'orders.zip_code',
-            'orders.created_at as latest_order_date'
-        )
-        ->whereRaw('orders.created_at = (SELECT MAX(o.created_at) FROM orders o WHERE o.user_id = users.id)')
-        ->orderByDesc('latest_order_date')
-        ->get();
+        $users = DB::table('users')
+            ->where('users.role', 'customer')
+            ->leftJoin('addresses', function ($join) {
+                $join->on('users.id', '=', 'addresses.user_id');
+            })
+            ->select(
+                'users.id as user_id',
+                'users.name as user_name',
+                'users.email',
+                'addresses.mobile',
+                'addresses.address',
+                'addresses.city',
+                'addresses.state',
+                'addresses.zip_code'
+            )
+            ->orderBy('users.id', 'DESC')
+            ->get();
 
         return response()->json([
             'status' => 200,
-            'data' => $user
+            'data' => $users
         ], 200);
     }
+
+
     public function getLastOrderDetails(){
         $user = Auth::user();
 

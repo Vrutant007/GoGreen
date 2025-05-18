@@ -125,10 +125,12 @@ const OrderDetail = () => {
                                     <div className='row'>
                                         <div className='col-md-4'>
                                             <div className='py-5'>
-                                                <strong>{orders.name}</strong>
-                                                <div>{orders.email}</div>
-                                                <div>{orders.mobile}</div>
-                                                <div>{orders.address}, {orders.city}, {orders.state}, {orders.zip_code}</div>
+                                                <strong>{orders.address?.name}</strong>
+                                                <div>{orders.address?.email}</div>
+                                                <div>{orders.address?.mobile}</div>
+                                                <div>
+                                                {orders.address?.address}, {orders.address?.area}, {orders.address?.city}, {orders.address?.state}, {orders.address?.zip_code}
+                                                </div>
                                             </div>
                                         </div>
                                         <div className='col-md-4'>

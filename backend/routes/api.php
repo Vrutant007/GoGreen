@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\admin\AdminVendorController;
 use App\Http\Controllers\admin\AuthController;
 use App\Http\Controllers\admin\BrandController;
 use App\Http\Controllers\admin\CategoryController;
@@ -14,6 +15,7 @@ use App\Http\Controllers\front\OrderController;
 use App\Http\Controllers\front\ProductController as FrontProductController;
 use App\Http\Controllers\front\StripeController;
 use App\Http\Controllers\front\UserAddressController;
+use App\Http\Controllers\vendor\VendorsController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -77,5 +79,15 @@ Route::group(['middleware' => ['auth:sanctum','checkAdminRole']],function(){
     Route::post('update-order/{id}',[AdminOrderController::class,'updateOrder']);
 
     Route::get('users',[UserController::class,'index']);
+    Route::get('vendors',[AdminVendorController::class,'index']);
+    Route::get('vendors/{id}/orders',[AdminVendorController::class,'vendorsOrder']);
 
+});
+
+Route::prefix('vendor')->group(function(){
+    Route::post('register',[VendorsController::class,'register']);
+    Route::post('login',[VendorsController::class,'authenticate']);
+    // Route::get('get-vendor',[VendorsController::class,'getVendor']);
+    // Route::put('update-vendor/{id}',[VendorsController::class,'updateVendor']);
+    // Route::delete('delete-vendor/{id}',[VendorsController::class,'deleteVendor']);
 });
