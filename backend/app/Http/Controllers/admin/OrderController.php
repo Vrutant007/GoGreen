@@ -9,7 +9,9 @@ use Illuminate\Http\Request;
 class OrderController extends Controller
 {
     public function index(){
-        $orders = Order::orderBy('created_at','DESC')->get();
+        $orders = Order::with(['address', 'customer']) // eager load relations
+            ->orderBy('created_at','DESC')
+            ->get();
 
         return response()->json([
             'status' => 200,
@@ -18,7 +20,8 @@ class OrderController extends Controller
     }
 
     public function detail($id){
-        $order = Order::with('items','items.product')->find($id);
+        $order = Order::with(['items', 'items.product', 'address', 'customer'])
+            ->find($id);
 
         if($order == null){
             return response()->json([
@@ -26,13 +29,12 @@ class OrderController extends Controller
                 'message' => 'Order not found',
                 'data' => []
             ],404);
-        }else{
-            return response()->json([
-                'status' => 200,
-                'data' => $order
-            ],200);
         }
 
+        return response()->json([
+            'status' => 200,
+            'data' => $order
+        ],200);
     }
 
     public function updateOrder($id, Request $request){
