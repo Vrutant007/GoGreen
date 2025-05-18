@@ -113,8 +113,8 @@ const ShowOrder = () => {
                                                 <td>
                                                     <Link to={`${order.id}`}>{order.id}</Link>
                                                 </td>
-                                                <td>{order.name}</td>
-                                                <td>{order.email}</td>
+                                                <td>{order.address.name}</td>
+                                                <td>{order.address.email}</td>
                                                 <td>&#8377;{order.grand_total}</td>
                                                 <td>{order.created_at}</td>
                                                 <td>
