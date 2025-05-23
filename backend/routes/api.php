@@ -82,6 +82,8 @@ Route::group(['middleware' => ['auth:sanctum','checkAdminRole']],function(){
     Route::get('vendors',[AdminVendorController::class,'index']);
     Route::get('vendors/{id}/orders',[AdminVendorController::class,'vendorsOrder']);
 
+    Route::get('get-dash-count',[AccountController::class,'dashboardCount']);
+
 });
 
 Route::prefix('vendor')->group(function(){
