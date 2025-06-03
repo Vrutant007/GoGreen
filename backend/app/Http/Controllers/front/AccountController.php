@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\front;
 
 use App\Http\Controllers\Controller;
+use App\Mail\WelcomeMail;
 use App\Models\Order;
 use App\Models\Product;
 use App\Models\User;
@@ -10,6 +11,7 @@ use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Validator;
 
 class AccountController extends Controller
@@ -36,6 +38,9 @@ class AccountController extends Controller
         $user->password = Hash::make($request->password);
         $user->role = 'customer';
         $user->save();
+
+        //Code for send mail From GG-7 Branch
+        Mail::to($user->email)->send(new WelcomeMail($user));
 
         return response()->json([
             'status' => 200,
