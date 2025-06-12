@@ -3,11 +3,13 @@
 namespace App\Http\Controllers\front;
 
 use App\Http\Controllers\Controller;
+use App\Mail\OrderPlacedMail;
 use App\Models\Addresses;
 use App\Models\Order;
 use App\Models\OrderItem;
 use App\Models\Payment;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
 
 class OrderController extends Controller
 {
@@ -51,6 +53,10 @@ class OrderController extends Controller
                 $orderItem->name = $item['title'];
                 $orderItem->save();
             }
+
+            // code for send mail From GG-7 branch
+            $order->load('customer');
+            Mail::to($order->customer->email)->send(new OrderPlacedMail($order));
 
             return response()->json([
                 'status' => 200,
