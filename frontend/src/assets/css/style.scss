@@ -252,3 +252,42 @@ ul{
     background-color: darkgreen !important;
     border-color: darkgreen !important;
 }
+
+.address-wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.address-list {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.address-box {
+    border: 1px solid #28a745;
+    padding: 15px;
+    border-radius: 8px;
+    cursor: pointer;
+    background-color: #f8f9fa;
+    color: #28a745;
+    transition: 0.3s;
+    width: 100%;
+
+    h5 {
+        margin-bottom: 10px;
+    }
+
+    &.selected {
+        background-color: #d4edda;
+        color: #000;
+        border-color: #155724;
+    }
+
+    &:hover {
+        background-color: #e6f7eb;
+    }
+}
+
+  
