@@ -34,6 +34,10 @@ import { Elements } from '@stripe/react-stripe-js';
 import { loadStripe } from '@stripe/stripe-js';
 import ChangePassword from './components/admin/ChangePassword'
 import UserChangePassword from './components/users/UserChangePassword'
+import UserAddresses from './components/common/UserAddresses'
+import UserListAddress from './components/users/UserListAddress'
+import UserCreateAddress from './components/users/UserCreateAddress'
+import UserEditAddress from './components/users/UserEditAddress'
 
 
 
@@ -77,8 +81,28 @@ function App() {
             <Route path='/account/change-password' element={
             <UserRequireAuth>
               <UserChangePassword />
-            </UserRequireAuth>
-          }/>
+            </UserRequireAuth>}/>
+
+            <Route path='/account/address/:id' element={
+            <UserRequireAuth>
+              <UserAddresses/>
+            </UserRequireAuth>}/>
+
+            <Route path='/account/address-list' element={
+            <UserRequireAuth>
+              <UserListAddress/>
+            </UserRequireAuth>}/>
+
+            <Route path='/account/add-address' element={
+            <UserRequireAuth>
+              <UserCreateAddress/>
+            </UserRequireAuth>}/>
+
+            <Route path='/account/edit-address/:id' element={
+            <UserRequireAuth>
+              <UserEditAddress/>
+            </UserRequireAuth>}/>
+
 
           {/*Admin Routes */}
 
