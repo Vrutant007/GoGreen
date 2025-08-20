@@ -29,6 +29,7 @@ const Confirmation = () => {
       setLoading(false)
       if(result.status == 200){
         setOrder(result.data);
+        console.log(result.data);
         setItems(result.data.items);
       }else{
         setOrder(null);
@@ -51,9 +52,9 @@ const Confirmation = () => {
       doc.setFontSize(12);
       doc.text(`Order ID: #${order.id}`, 10, 50);
       doc.text(`Order Date: ${order.created_at}`, 10, 60);
-      doc.text(`Customer Name: ${order.name}`, 10, 70);
-      doc.text(`Address: ${order.address}, ${order.city}, ${order.state}, ${order.zip_code}`, 10, 80);
-      doc.text(`Contact No.: ${order.mobile}`, 10, 90);
+      doc.text(`Customer Name: ${order.address.name}`, 10, 70);
+      doc.text(`Address: ${order.address.address}, ${order.address.city}, ${order.address.state}, ${order.address.zip_code}`, 10, 80);
+      doc.text(`Contact No.: ${order.address.mobile}`, 10, 90);
 
       const tableData = items.map((item) => [
         item.name,
@@ -121,9 +122,9 @@ const Confirmation = () => {
                           <p><strong>Payment Method :</strong> {order.payment_status === 'paid' ? 'CARD' : 'COD'}</p>
                         </div>
                         <div className='col-md-6'>
-                          <p><strong>Customer :</strong> {order.name}</p>
-                          <p><strong>Address :</strong> {order.address}, {order.city}, {order.state}, {order.zip_code}</p>
-                          <p><strong>Contant :</strong> {order.mobile}</p>
+                          <p><strong>Customer :</strong> {order.address.name}</p>
+                          <p><strong>Address :</strong> {order.address.address}, {order.address.city}, {order.address.state}, {order.address.zip_code}</p>
+                          <p><strong>Contant :</strong> {order.address.mobile}</p>
                         </div>
                       </div>
                       <div className='row'>

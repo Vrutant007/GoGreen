@@ -16,4 +16,7 @@ class Order extends Model
             'created_at' => 'datetime:d M,Y',
         ];
     }
+    public function address() {
+        return $this->belongsTo(Addresses::class);
+    }
 }

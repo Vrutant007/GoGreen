@@ -8,6 +8,7 @@ import { useForm } from 'react-hook-form';
 import { apiUrl, usertoken } from './common/http';
 import { toast } from 'react-toastify';
 import { CardElement, useStripe, useElements } from '@stripe/react-stripe-js';
+import UserAddresses from './common/UserAddresses';
 
 
 
@@ -17,6 +18,7 @@ const Checkout = () => {
     const [paymentMethod, setpaymentMethod] = useState('cod');
     const {cartData, Delivery, grandTotal, subTotal, applyCoupon, removeCoupon, coupon, discount} = useContext(CartContext);
     const [couponCode, setCouponCode] = useState('');
+    const [selectedAddressId, setSelectedAddressId] = useState(null);
     const [formData, setFormData] = useState({
         name: '',
         email: '',
@@ -62,7 +64,8 @@ const Checkout = () => {
             cart: cartData,
             coupon_code: coupon?.code || '',
             payment_method: paymentMethod,
-            card_last_four: formData.card_last_four || null
+            card_last_four: formData.card_last_four || null,
+            address_id: selectedAddressId
         }
         fetch(`${apiUrl}/save-order`,{
             method: 'POST',
@@ -179,7 +182,7 @@ const Checkout = () => {
                         
                         <div className='col-md-7'>
                             <h3 className='border-bottom pb-3'><strong>Billing Details</strong></h3>
-                            <div className='row pt-3'>
+                            {/* <div className='row pt-3'>
                                 <div className='col-md-6'>
                                     <div className='mb-3'>
                                         <input
@@ -273,7 +276,8 @@ const Checkout = () => {
                                         {errors.mobile && <p className='invalid-feedback'>{errors.mobile?.message}</p>}
                                     </div>
                                 </div>
-                            </div>
+                            </div> */}
+                            <UserAddresses onSelect={(id) => setSelectedAddressId(id)}/>
                         </div>
                         <div className='col-md-5'>
                             <h3 className='border-bottom pb-3'><strong>Items</strong></h3>
