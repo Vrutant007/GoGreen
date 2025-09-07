@@ -38,6 +38,8 @@ import UserAddresses from './components/common/UserAddresses'
 import UserListAddress from './components/users/UserListAddress'
 import UserCreateAddress from './components/users/UserCreateAddress'
 import UserEditAddress from './components/users/UserEditAddress'
+import ShowVendors from './components/admin/ShowVendors'
+import ShowVendorOrders from './components/admin/ShowVendorOrders'
 
 
 
@@ -190,6 +192,16 @@ function App() {
           <Route path='/admin/change-password' element={
             <AdminRequireAuth>
               <ChangePassword/>
+            </AdminRequireAuth>
+          }/>
+          <Route path='/admin/show-vendors' element={
+            <AdminRequireAuth>
+              <ShowVendors/>
+            </AdminRequireAuth>
+          }/>
+          <Route path='/admin/:id/show-vendors-orders' element={
+            <AdminRequireAuth>
+              <ShowVendorOrders/>
             </AdminRequireAuth>
           }/>
         </Routes>      

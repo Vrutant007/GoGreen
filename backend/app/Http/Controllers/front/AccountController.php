@@ -4,7 +4,9 @@ namespace App\Http\Controllers\front;
 
 use App\Http\Controllers\Controller;
 use App\Models\Order;
+use App\Models\Product;
 use App\Models\User;
+use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
@@ -96,6 +98,28 @@ class AccountController extends Controller
                 'status' => 200,
                 'data' => $order
             ]);
+        }
+    }
+    public function dashboardCount(){
+        try{
+            $userCount = User::count();
+            $orderCount = Order::count();
+            $productCount = Product::count();
+
+            return response()->json([
+                'status' => 200,
+                'data' => [
+                    'user' => $userCount,
+                    'order' => $orderCount,
+                    'product' => $productCount
+                ]
+            ],200);
+        } catch(Exception $e) {
+            return response()->json([
+                'status' => 500,
+                'message' => 'Internal Server Error',
+                'error' => $e->getMessage()
+            ], 500);
         }
     }
 }

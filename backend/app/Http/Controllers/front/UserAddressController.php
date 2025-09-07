@@ -24,7 +24,8 @@ class UserAddressController extends Controller
             'address' => 'required|string',
             'city' => 'required|string',
             'state' => 'required|string',
-            'zip_code' => 'required'
+            'zip_code' => 'required',
+            'area' => 'required|string'
         ]);
 
         if ($validator->fails()) {
@@ -44,6 +45,7 @@ class UserAddressController extends Controller
         $addresses->state = $request->state;
         $addresses->zip_code = $request->zip_code;
         $addresses->user_id = Auth::id();
+        $addresses->area = $request->area;
         $addresses->save();
 
 
@@ -89,7 +91,8 @@ class UserAddressController extends Controller
             'address' => 'required|string',
             'city' => 'required|string',
             'state' => 'required|string',
-            'zip_code' => 'required'
+            'zip_code' => 'required',
+            'area' => 'required|string'
         ]);
 
         if ($validator->fails()) {
@@ -108,6 +111,7 @@ class UserAddressController extends Controller
         $addresses->state = $request->state;
         $addresses->zip_code = $request->zip_code;
         $addresses->user_id = Auth::id();
+        $addresses->area = $request->area;
         $addresses->save();
 
         return response()->json([
