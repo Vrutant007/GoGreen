@@ -17,6 +17,10 @@ class Order extends Model
         ];
     }
     public function address() {
-        return $this->belongsTo(Addresses::class);
+        return $this->belongsTo(Addresses::class, 'address_id');
+    }
+
+    public function customer() {
+        return $this->belongsTo(User::class, 'user_id');
     }
 }
