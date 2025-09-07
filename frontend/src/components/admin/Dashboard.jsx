@@ -1,9 +1,40 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import Header from '../common/Header'
 import Footer from '../common/Footer'
 import SideBar from './SideBar'
+import { admintoken, apiUrl } from '../common/http'
+import CountUp from 'react-countup';
 
 const Dashboard = () => {
+  const [UserCount, SetUserCount] = useState([]);
+  const [OrderCount, SetOrderCount] = useState([]);
+  const [ProductCount, SetProductCount] = useState([]);
+
+  const fetchDashboardCount = async() =>{
+    const response = fetch(`${apiUrl}/get-dash-count`,{
+      method: 'GET',
+      headers: {
+          'Content-Type': 'application/json',
+          'Accept' : 'application/json',
+          'Authorization' : `Bearer ${admintoken()}`
+        },
+    }).then(res => res.json())
+    .then(result => {
+        if(result.status == 200){
+          SetUserCount(result.data.user);
+          SetOrderCount(result.data.order);
+          SetProductCount(result.data.product);
+
+          console.log(result.data)
+        }else{
+          console.log('Something Went Worng');
+        }
+      })
+  }
+
+  useEffect(()=>{
+    fetchDashboardCount();
+  },[])
   return (
     <>
         <Header/>
@@ -23,33 +54,33 @@ const Dashboard = () => {
                 <div className='col-md-4'>
                 <div className='card shadow'>
                   <div className='card-body'>
-                    <h2>0</h2>
+                    <h2><CountUp end={UserCount} duration={4} /></h2>
                     <span>User</span>
                   </div>
                   <div className='card-footer'>
-                    <a href="">View Users</a>
+                    <a href="/admin/users">View Users</a>
                   </div>
                 </div>
                 </div>
                 <div className='col-md-4'>
                   <div className='card shadow'>
                     <div className='card-body'>
-                      <h2>0</h2>
+                      <h2><CountUp end={OrderCount} duration={4} /></h2>
                       <span>Order</span>
                     </div>
                     <div className='card-footer'>
-                      <a href="">View Order</a>
+                      <a href="/admin/orders">View Order</a>
                     </div>
                   </div>
                 </div>
                 <div className='col-md-4'>
                 <div className='card shadow'>
                   <div className='card-body'>
-                    <h2>0</h2>
+                    <h2><CountUp end={ProductCount} duration={2} /></h2>
                     <span>Products</span>
                   </div>
                   <div className='card-footer'>
-                    <a href="">View Products</a>
+                    <a href="/admin/products">View Products</a>
                   </div>
                 </div>
                 </div>

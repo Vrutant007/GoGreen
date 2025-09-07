@@ -66,10 +66,10 @@ const ShowUser = () => {
                                                 <td>{user.user_id}</td>
                                                 <td>{user.user_name}</td>
                                                 <td>{user.email}</td>
-                                                <td>{user.mobile}</td>
-                                                <td>{user.city}</td>
-                                                <td>{user.state}</td>
-                                                <td>{user.zip_code}</td>
+                                                <td>{user.mobile ? user.mobile : '----'}</td>
+                                                <td>{user.city ? user.city : '----'}</td>
+                                                <td>{user.state ? user.state : '----'}</td>
+                                                <td>{user.zip_code ? user.zip_code : '----'}</td>
                                             </tr>
                                         )
                                     })
