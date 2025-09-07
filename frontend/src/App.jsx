@@ -40,10 +40,16 @@ import UserCreateAddress from './components/users/UserCreateAddress'
 import UserEditAddress from './components/users/UserEditAddress'
 import ShowVendors from './components/admin/ShowVendors'
 import ShowVendorOrders from './components/admin/ShowVendorOrders'
+import * as dotenv from "dotenv";
 
+dotenv.config();
+const stripePublicKey = process.env.STRIPE_PUBLIC_KEY;
 
+if (!stripePublicKey) {
+  throw new Error("Missing STRIPE_PUBLIC_KEY in environment variables");
+}
 
-const stripePromise = loadStripe("pk_test_51QqEGsFPl466N21zAF0dPPxLJMIorBlFAc4J1aPyOgZxvQt7yAOfhyahuKqp72OWrOtcYls1HtUXm6jSBOoeFpTA00mRWa9y9m");
+const stripePromise = loadStripe(stripePublicKey);
 
 function App() {
 

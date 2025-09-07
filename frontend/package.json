@@ -13,6 +13,7 @@
     "@stripe/react-stripe-js": "^3.6.0",
     "@stripe/stripe-js": "^7.0.0",
     "bootstrap": "^5.3.3",
+    "dotenv": "^17.2.2",
     "jodit-react": "^5.2.15",
     "jspdf": "^3.0.1",
     "jspdf-autotable": "^5.0.2",
